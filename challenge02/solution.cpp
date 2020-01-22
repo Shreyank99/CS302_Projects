@@ -1,10 +1,10 @@
 // Challenge 01: Rotating Arrays; null solution
 #include <iostream>
-#include <set>
+#include <vector>
 #include <map>
 #include <sstream>
-#include <string>
 #include <stdlib.h>
+#include <algorithm>
 #include <iterator>
 #include <utility>
 using namespace std;
@@ -13,8 +13,7 @@ int main(int argc, char *argv[]){
 		stringstream ss;
 		string temp;
 		int n_elements, element;
-		set <int> my_set;
-		set <int>::iterator set_it; 
+		vector <int> my_vec;
 		multimap <int, pair< int, int > > my_map;
 		multimap <int, pair< int, int > >::iterator map_it;
 		int num1, num2, diff; 
@@ -26,30 +25,25 @@ int main(int argc, char *argv[]){
 			getline(cin, temp);
 			ss<<temp;
 			while(ss>>element){
-				my_set.insert(element);
+				my_vec.push_back(element);
 			}
-				set_it = my_set.begin();
-				int count = 0;
-				for( ; set_it != my_set.end(); set_it++){
-					if(count == 0){
-						num1 = *set_it;
-						num2 = *next(set_it,1);
-						diff = abs(num1-num2);
-						my_map.insert(pair<int, pair<int, int> > (diff, pair<int, int> (num1, num2)));
-						count = 1;
-					}
-					else{
-						count = 0;
-					}
-				}
+			sort(my_vec.begin(), my_vec.end());
+
+			for(int i = 0 ; i < int(my_vec.size()-1); i++){
+				num1 = my_vec[i];
+				num2 = my_vec[i+1];
+				diff = abs(num1-num2);
+				my_map.insert(pair<int, pair<int, int> > (diff, pair<int, int> (num1, num2)));
+			}
 				map_it = my_map.begin();
 				int temp3 = map_it->first;
 				while(temp3 == map_it->first){
-					cout<<map_it->second.first<<" "<<map_it->second.second<<" ";
+					cout<<map_it->second.first<<" "<<map_it->second.second;
 					map_it++;
+					if(temp3 == map_it->first)	cout<<" ";
 				}
 				cout<<endl;
-				my_set.clear();
+				my_vec.clear();
 				my_map.clear();
 		}
 	return 0;

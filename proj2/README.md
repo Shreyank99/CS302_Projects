@@ -2,8 +2,8 @@
 
 Tasks:  
 main.cpp  
-list.cpp  
-merge.cpp  
-qsort.cpp  
-quick.cpp  
-stl.cpp  
+list.cpp  <- shrey
+merge.cpp  <- shrey
+qsort.cpp  <- andrew
+quick.cpp  <- andrew
+stl.cpp  <- shrey

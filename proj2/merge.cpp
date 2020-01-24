@@ -16,11 +16,13 @@ void merge_sort(List &l, bool numeric) {
 }
 
 Node *msort(Node *head, bool numeric) {
+	return NULL;
 }
 
 void split(Node *head, Node *&left, Node *&right) {
 }
 
 Node *merge(Node *left, Node *right, bool numeric) {
+	return NULL;
 }
 

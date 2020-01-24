@@ -24,8 +24,11 @@ struct List {
 
 // Functions -------------------------------------------------------------------
 
-bool node_number_compare(const Node *a, const Node *b); 	//implement in this file (volsort.h), used by quick, merge and stl
-bool node_string_compare(const Node *a, const Node *b);		//implement in this file (volsort.h), used by quick, merge and stl
+//implement in this file (volsort.h), used by quick, merge and stl
+bool node_number_compare(const Node *a, const Node *b);
+
+//implement in this file (volsort.h), used by quick, merge and stl
+bool node_string_compare(const Node *a, const Node *b);
 
 void dump_node(Node *n);					// implement in this file (volsort.h) to make it easier for TAs to grade
 
@@ -34,4 +37,6 @@ void qsort_sort(List &l, bool numeric);	// define in qsort.cpp - sort using qsor
 void merge_sort(List &l, bool numeric);	// define in merge.cpp - your implementation
 void quick_sort(List &l, bool numeric);	// define in quick.cpp - your implementation
 
+
 #endif
+

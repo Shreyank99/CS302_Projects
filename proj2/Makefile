@@ -3,7 +3,7 @@ CXXFLAGS=	-g -Wall -std=gnu++11
 LDFLAGS=	
 SHELL=		bash
 PROGRAMS=	volsort
-SOURCES=	main.cpp stl.cpp qsort.cpp quick.cpp merge.cpp list.cpp
+SOURCES=	main.cpp stl.cpp qsort.cpp quick.cpp merge.cpp list.cpp node.cpp
 OBJECTS=	$(SOURCES:.cpp=.o)
 
 all:		$(PROGRAMS)

@@ -22,10 +22,6 @@ struct List {
     List(); 					// define in list.cpp
     ~List();					// define in list.cpp
 	
-
-	std::list<int>::iterator begin();
-	std::list<int>::iterator end();
-
 	void Push_Back(int &n);
 	void Push_Back(std::string &s);
 

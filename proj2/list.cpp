@@ -24,18 +24,3 @@ List::~List() {
 	delete head;
 }
 
-list<int>::iterator List::begin(){
-	//return first element iterator
-	list<int> l;	
-	list<int>::iterator it;
-	it = l.begin();
-	return it;
-}
-
-list<int>::iterator List::end(){
-	//return last element iterator
-	list<int> l;	
-	list<int>::iterator it;
-	it = l.end();
-	return it;
-}

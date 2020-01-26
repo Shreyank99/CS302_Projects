@@ -4,6 +4,10 @@
 #define VOLSORT_H
 
 #include <string>
+#include <iterator>
+#include <list>
+
+//template <typename T>
 
 struct Node {
     std::string string;
@@ -17,8 +21,17 @@ struct List {
 
     List(); 					// define in list.cpp
     ~List();					// define in list.cpp
+	
 
-  //    void push_front(const std::string &s);	//define below
+	std::list<int>::iterator begin();
+	std::list<int>::iterator end();
+
+	void Push_Back(int &n);
+	void Push_Back(std::string &s);
+
+	void Push_Front(int &n);
+	void Push_Front(std::string &s);
+
 };
 
 

@@ -9,12 +9,12 @@ bool node_number_compare(const Node *a, const Node *b)
 	return false;
 }
 
-bool node_string_compare(const Node *a, const Node *b)
+/*bool node_string_compare(const Node *a, const Node *b)
 {
 	if(a->string == b->string) return true;
 	return false;
 }
-
+*/
 void dump_node(Node *n)
 {
 	Node *tmp;

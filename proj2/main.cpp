@@ -84,6 +84,9 @@ int main(int argc, char *argv[]) {
         case MODE_QUICK:
             quick_sort(data, numeric);
             break;
+        case MODE_OBILIVIOUS:
+			oblivious_sort(data, numeric);
+			break;
     }
     */
 

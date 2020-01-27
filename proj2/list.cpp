@@ -13,7 +13,6 @@ List::List() {
 }
 
 List::~List() {
-	if(size == 0) return;
 	while(size != 0){
 		Node *temp = head->next;
 		Node *temp2 = temp->next;
@@ -23,4 +22,3 @@ List::~List() {
 	}
 	delete head;
 }
-

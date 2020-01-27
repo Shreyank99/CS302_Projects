@@ -2,8 +2,9 @@
 
 Tasks:  
 main.cpp  
-list.cpp  <- shrey  
-merge.cpp  <- shrey  
-qsort.cpp  <- andrew  
-quick.cpp  <- andrew  
-stl.cpp  <- shrey
+list.cpp  <- shrey/Hunter  (DONE)
+merge.cpp  <- shrey  ()
+node.cpp <- hunter ()
+qsort.cpp  <- andrew () 
+quick.cpp  <- andrew  ()
+stl.cpp  <- shrey (DONE)

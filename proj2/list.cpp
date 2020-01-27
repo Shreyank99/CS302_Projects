@@ -7,8 +7,8 @@ List::List() {
 	Node* s = new Node();
 	head = s;
 	head->number = 0;
-	head->string = "";
-	head->next = NULL;
+	head->string = "----------";
+	head->next = nullptr;
 	size = 0;
 }
 

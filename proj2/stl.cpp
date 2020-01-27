@@ -11,16 +11,18 @@ using namespace std;
 
 void stl_sort(List &l, bool numeric) {	
 	vector<Node*> my_list; 
-	Node* node = l.head; 
-	while(node != NULL){
+	Node* node = l.head->next; 
+	while(node != nullptr){
 		my_list.push_back(node);
 		node = node->next;
 	}
 	
 	sort(my_list.begin(), my_list.end(), node_number_compare); 
 
-	for(int i = 0; i > int(my_list.size()); i++){
-		if(i == int(my_list.size()-2)){
+
+	l.head->next = my_list[0];
+	for(int i = 0; i < int(my_list.size()); i++){
+		if(i == int(my_list.size()-1)){
 			my_list[i]->next = NULL;
 		}
 		else{

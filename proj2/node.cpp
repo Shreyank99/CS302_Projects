@@ -6,16 +6,17 @@ using namespace std;
 
 bool node_number_compare(const Node *a, const Node *b)
 {
-	if(a->number == b->number) return true;
+	//cout << "here\n";
+	if(a->number < b->number) return true;
 	return false;
 }
 
-/*bool node_string_compare(const Node *a, const Node *b)
+bool node_string_compare(const Node *a, const Node *b)
 {
-	if(a->string == b->string) return true;
+	if(a->string < b->string) return true;
 	return false;
 }
-*/
+
 void dump_node(Node *n)
 {
 	Node *tmp;
@@ -54,7 +55,7 @@ void List::Push_Front(const std::string &s)
 
 	n = new Node;
 	n->number = number;
-//	cout<<number<<endl;
+	//cout<<number<<endl;
 	n->string = s;
 	size++;
 

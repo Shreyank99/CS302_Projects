@@ -4,7 +4,6 @@
 
 #include <algorithm>
 #include <iostream>
-#include "list.cpp"
 using namespace std;
 
 void stl_sort(List &l, bool numeric) {	

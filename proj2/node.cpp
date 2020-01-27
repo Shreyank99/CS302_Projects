@@ -1,7 +1,8 @@
 #include "volsort.h"
 #include <iostream>
-using std::cout;
-using std::endl;
+#include <stdexcept>
+#include <string>
+using namespace std;
 
 bool node_number_compare(const Node *a, const Node *b)
 {
@@ -33,4 +34,31 @@ void dump_node(Node *n)
 	return;
 }
 
-//void push_front(const std::string &s)
+void List::Push_Front(const std::string &s)
+{
+
+	Node *n;
+	Node *tmp;
+	int number;
+
+	try{
+		number = stoi(s);	
+	}
+
+	catch(std::invalid_argument& e){
+		number = 0;
+	}
+	catch(std::out_of_range& e){
+		number = 0;
+	}
+
+	n = new Node;
+	n->number = number;
+	n->string = s;
+
+	tmp = head->next;
+	head->next = n;
+	n->next = tmp;
+
+
+}

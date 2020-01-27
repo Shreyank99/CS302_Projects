@@ -17,8 +17,9 @@ void stl_sort(List &l, bool numeric) {
 		node = node->next;
 	}
 	
-	sort(my_list.begin(), my_list.end(), node_number_compare); 
+	if(numeric)	sort(my_list.begin(), my_list.end(), node_number_compare); 
 
+	else	sort(my_list.begin(), my_list.end(), node_string_compare); 
 
 	l.head->next = my_list[0];
 	for(int i = 0; i < int(my_list.size()); i++){

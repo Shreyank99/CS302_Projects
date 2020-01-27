@@ -20,8 +20,7 @@ struct List {
     List(); 					// define in list.cpp
     ~List();					// define in list.cpp
 	
-	void Push_Front(int &n);
-	void Push_Front(std::string &s);
+	void Push_Front(const std::string &s);
 
 };
 

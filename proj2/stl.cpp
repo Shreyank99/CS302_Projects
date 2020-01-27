@@ -1,6 +1,7 @@
 // stl.cpp
 
 #include "volsort.h"
+//#include "node.cpp"
 
 #include <algorithm>
 #include <iostream>
@@ -16,7 +17,7 @@ void stl_sort(List &l, bool numeric) {
 		node = node->next;
 	}
 	
-	sort(my_list.begin(), my_list.end()); 
+	sort(my_list.begin(), my_list.end(), node_number_compare); 
 
 	for(int i = 0; i > int(my_list.size()); i++){
 		if(i == int(my_list.size()-2)){

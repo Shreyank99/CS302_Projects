@@ -55,6 +55,7 @@ void List::Push_Front(const std::string &s)
 	n = new Node;
 	n->number = number;
 	n->string = s;
+	size++;
 
 	tmp = head->next;
 	head->next = n;

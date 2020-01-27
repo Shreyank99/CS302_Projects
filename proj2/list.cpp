@@ -8,7 +8,7 @@ List::List() {
 	head = s;
 	head->number = 0;
 	head->string = "";
-	head->next = head;
+	head->next = NULL;
 	size = 0;
 }
 

@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
     }
     
 
-    for (Node * curr = data.head; curr != NULL; curr = curr->next) {
+    for (Node * curr = data.head->next; curr != NULL; curr = curr->next) {
         if (numeric) {
             std::cout << curr->number << std::endl;
         } else {

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include <vector>
+#include <array>
 
 using namespace std;
 
@@ -12,40 +13,49 @@ int int_cmp(const void *a, const void *b);
 int cstring_cmp(const void *a, const void *b);
 
 void qsort_sort(List &l, bool numeric) {	
-	Node* my_list[l.size];
-
-	Node* node = l.head->next;
-	int count = 0;
-	while(node != nullptr){
-		my_list[count] = (node);
-		cout<<node->number<<endl;
-		node = node->next;
-	}
+	Node *cur_node = l.head->next;
+	int list_size = l.size;	
+	int count = 0; 
 	
-	if(numeric)	qsort(my_list, l.size, sizeof(Node), int_cmp); 
-	else	qsort(my_list, l.size, sizeof(Node), cstring_cmp); 
-	
-	l.head->next = my_list[0];
-
-	for(int i = 0; i < int(l.size); i++){
-		if(i == int(l.size-1)){
-			my_list[i]->next = NULL;
+	if(numeric){
+		int my_list[list_size];
+		while(cur_node != nullptr){
+			my_list[count] = cur_node->number;
+			count++;
+			cur_node = cur_node->next;
 		}
-		else{
-			my_list[i]->next = my_list[i+1];
+		qsort((void *)my_list, l.size, sizeof(int), int_cmp);
+
+		l.Clear();
+		for(int i =list_size-1; i >= 0; i--){
+			l.Push_Front(to_string(my_list[i]));
 		}
 	}
+	else{
+		string my_list[list_size];
+		while(cur_node != nullptr){
+			my_list[count] = cur_node->string;
+			count++;
+			cur_node = cur_node->next;
+		}
+		qsort((void *)my_list, l.size, sizeof(string), cstring_cmp); 
+		
+		l.Clear();
+		for(int i =list_size-1; i >= 0; i--){
+			l.Push_Front("" + my_list[i]);
+		}
+	}
+
 }
 
 int int_cmp(const void *a, const void *b){
-	const Node *ia = (Node *)a;
-	const Node *ib = (Node *)b;
-	cout<<ib->number<<"----------" <<ia->number<<endl;
-	return (ia->number - ib->number);
+	int ia = (*(int* )a);
+	int ib = (*(int *)b);
+	return (ia- ib);
 }
 
 int cstring_cmp(const void *a, const void *b){
-	Node* ia = (Node *)a;
-	Node *ib = (Node *)b;
-	return strcmp(ia->string.c_str(),ib->string.c_str());
+	string ia = (*(string *)a);
+	string ib = (*(string *)b);
+	return strcmp(ia.c_str(),ib.c_str());
 }

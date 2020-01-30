@@ -20,10 +20,10 @@ clean:
 test:		test-output test-memory
 
 test-output:	$(PROGRAMS)
-	@echo "Testing output (stl string)..."
-	@diff --suppress-common-lines -y <(./volsort -m stl      < input) output.string
-#	@echo "Testing output (stl number)..."
-#	@diff --suppress-common-lines -y <(./volsort -m stl -n   < input) output.number
+	@echo "Testing output (qsort string)..."
+	@diff --suppress-common-lines -y <(./volsort -m qsort      < input) output.string
+#	@echo "Testing output (qsort number)..."
+#	@diff --suppress-common-lines -y <(./volsort -m qsort -n   < input) output.number
 #	@echo "Testing output (qsort string)..."
 #	@diff --suppress-common-lines -y <(./volsort -m qsort    < input) output.string
 #	@echo "Testing output (qsort number)..."

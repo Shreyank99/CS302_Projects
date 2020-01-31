@@ -19,7 +19,7 @@ struct List {
 
     List(); 					// define in list.cpp
     ~List();					// define in list.cpp
-	
+	void Clear();	
 	void Push_Front(const std::string &s);
 
 };

@@ -25,10 +25,10 @@ Node *msort(Node *head, bool numeric) {
 	if (head->next == nullptr || head->next->next == nullptr)
 		return head;
 
-	split(head, &left, &right);
+	split(head, left, right);
 
-	left = msort(&left, numeric);
-	right = msort(&right, numeric);
+	left = msort(left, numeric);
+	right = msort(right, numeric);
 
 	return merge(left, right, numeric);
 }

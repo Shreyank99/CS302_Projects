@@ -34,34 +34,31 @@ Node *qsort(Node *head, bool numeric) {
 		
 	Node * left = new Node();
 	Node * right = new Node();
-	Node * tmp = head;
-	int tmp_num = 0;
-	tmp_num += tmp->number;
-	while(tmp != nullptr){
-		if(tmp->next == nullptr)
-		{
-			tmp_num += tmp->number;
-		}
-		tmp = tmp->next;
-	}
+	//Node * tmp = head;
+	//int tmp_num = 0;
+	//tmp_num += tmp->number;
+	//while(tmp != nullptr){
+	//	if(tmp->next == nullptr)
+	//	{
+	//		tmp_num += tmp->number;
+	//	}
+	//	tmp = tmp->next;
+	//}
 
-	tmp_num = int(tmp_num/2);
-	Node * pivot = new Node();
-	pivot->number = tmp_num;
-	pivot->string = to_string(tmp_num);
-	pivot->next = nullptr;
-//	cout<<"---------------"<<pivot->number<<endl;
+	//tmp_num = int(tmp_num/2);
+	Node * pivot = head;
+	//pivot->number = tmp_num;
+	//pivot->string = to_string(tmp_num);
+	//pivot->next = nullptr;
+	cout<<"---------------"<<pivot->number<<endl;
 
-	partition(head, pivot, left, right, numeric);	
-	//cout<<endl;
-	//cout<<endl;
-	//cout<<left->next->number<<"-----"<<right->next->number<<endl;
+	if(head->next != nullptr)	partition(head->next, pivot, left, right, numeric);	
 	
 	if(left->next->next != nullptr){
 		left->next = qsort(left->next, numeric);
 	}
 	if(right->next->next != nullptr){
-		right->next = qsort(right->next, numeric);
+		right->next  = qsort(right->next, numeric);
 	}
 	//cout<<left->next->number<<"-------!!!!--------"<<right->next->number<<endl;
 	Node* tempo = concatenate(left, right);
@@ -75,10 +72,10 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 		Node * tmp1 = left;
 		Node * tmp2 = right;
 		while(head != nullptr){
-		//	cout<<head->number<<"-----"<<pivot->number<<endl;
+			cout<<head->number<<"-----"<<pivot->number<<endl;
 			if(head->number <= pivot->number){				
 				left->next = head;
-				if(head->next != nullptr)	left = left->next;
+				if(head->next != nullptr) left = left->next;
 				else	right->next = nullptr;
 				head = head->next;
 			}
@@ -91,8 +88,9 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 				head = head->next;
 			}
 		}
-		//left->next = nullptr;
-		//right->next = nullptr;
+		left->next = pivot;
+		left->next->next = nullptr;
+		
 		right = tmp2;
 		left = tmp1;
 //		cout << right->next->number<< " ";
@@ -119,4 +117,3 @@ Node *concatenate(Node *left, Node *right) {
 	cout<<endl;
 	return tmp;
 }
-

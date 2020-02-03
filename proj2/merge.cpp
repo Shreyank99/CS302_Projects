@@ -37,7 +37,20 @@ void split(Node *head, Node *&left, Node *&right) {
 
 }
 
-Node *merge(Node *left, Node *right, bool numeric) {
-	return NULL;
-}
+Node *merge(Node *left, Node *right) {
+	Node* temp = left;
+  
+  while(left->next != nullptr) {
+      left = left->next;
+  }
 
+  left->next = right->next;
+
+  while(left->next != nullptr) {
+      left = left->next;
+  }
+  
+  left->next = nullptr;
+  
+  return temp;
+}

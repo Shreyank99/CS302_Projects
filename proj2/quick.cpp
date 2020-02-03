@@ -16,6 +16,7 @@ Node *concatenate(Node *left, Node *right);
 
 void quick_sort(List &l, bool numeric) {
 	Node* tmp = l.head->next;
+	cout<<l.head->next->number<<endl;
 	l.head->next = qsort(tmp, numeric);
 //	tmp = l.head;
 //	cout << endl;
@@ -28,12 +29,12 @@ void quick_sort(List &l, bool numeric) {
 }
 
 
-
+//Head = first element of list of nodes
 Node *qsort(Node *head, bool numeric) {
 		
-	Node * left;
-	Node * right;
-	Node * tmp = head->next;
+	Node * left = new Node();
+	Node * right = new Node();
+	Node * tmp = head;
 	int tmp_num = 0;
 	tmp_num += tmp->number;
 	while(tmp != nullptr){
@@ -49,7 +50,7 @@ Node *qsort(Node *head, bool numeric) {
 	pivot->number = tmp_num;
 	pivot->string = to_string(tmp_num);
 	pivot->next = nullptr;
-	cout<<"---------------"<<pivot->number<<endl;
+//	cout<<"---------------"<<pivot->number<<endl;
 
 	partition(head, pivot, left, right, numeric);	
 	//cout<<endl;
@@ -63,7 +64,10 @@ Node *qsort(Node *head, bool numeric) {
 		right->next = qsort(right->next, numeric);
 	}
 	//cout<<left->next->number<<"-------!!!!--------"<<right->next->number<<endl;
-	return concatenate(left, right);
+	Node* tempo = concatenate(left, right);
+	delete left;
+	delete right;
+	return tempo;
 }
 
 void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric) {
@@ -71,10 +75,9 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 		Node * tmp1 = left;
 		Node * tmp2 = right;
 		while(head != nullptr){
-			cout<<head->number<<"-----"<<pivot->number<<endl;
+		//	cout<<head->number<<"-----"<<pivot->number<<endl;
 			if(head->number <= pivot->number){				
 				left->next = head;
-				//left->next->next = nullptr;
 				if(head->next != nullptr)	left = left->next;
 				else	right->next = nullptr;
 				head = head->next;
@@ -88,6 +91,8 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 				head = head->next;
 			}
 		}
+		//left->next = nullptr;
+		//right->next = nullptr;
 		right = tmp2;
 		left = tmp1;
 //		cout << right->next->number<< " ";

@@ -10,110 +10,119 @@ using namespace std;
 
 Node *qsort(Node *head, bool numeric);
 void  partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric);
-Node *concatenate(Node *left, Node *right);
+Node *concatenate(Node *left, Node *right, Node *pivot);
 
 // Implementations
 
 void quick_sort(List &l, bool numeric) {
-	Node* tmp = l.head->next;
-	cout<<l.head->next->number<<endl;
-	l.head->next = qsort(tmp, numeric);
-//	tmp = l.head;
-//	cout << endl;
-//	while(tmp != nullptr){
-//		cout<<tmp->number<<" ";
-//		tmp = tmp->next;
-//	}
-//	cout<<"end of quick_sort\n";
+	l.head->next = qsort(l.head->next, numeric);
 	
 }
 
 
 //Head = first element of list of nodes
 Node *qsort(Node *head, bool numeric) {
-		
-	Node * left = new Node();
-	Node * right = new Node();
-	//Node * tmp = head;
-	//int tmp_num = 0;
-	//tmp_num += tmp->number;
-	//while(tmp != nullptr){
-	//	if(tmp->next == nullptr)
-	//	{
-	//		tmp_num += tmp->number;
-	//	}
-	//	tmp = tmp->next;
-	//}
 
-	//tmp_num = int(tmp_num/2);
-	Node * pivot = head;
-	//pivot->number = tmp_num;
-	//pivot->string = to_string(tmp_num);
-	//pivot->next = nullptr;
-	cout<<"---------------"<<pivot->number<<endl;
+	//cout << "qsort begin\n";
 
-	if(head->next != nullptr)	partition(head->next, pivot, left, right, numeric);	
+	Node *left;
+	Node *right;
+	Node *pivot;
+
+	left = nullptr;
+	right = nullptr;
+	pivot = head;
+	//cout << "head in qsort: " << head->number << endl;
+	//cout << "left before anything: " << left << endl;
+	if(head->next != nullptr)	partition(head, pivot, left, right, numeric);	
+
+	//cout << "after partition\n";
+	if(left != nullptr) if(left->next != nullptr) left = qsort(left, numeric);
+	if(right != nullptr) if(right->next != nullptr) right = qsort(right, numeric);
+
+	//cout << "before con call\n";
+	//if(left != nullptr) cout << "left:  " << left->number << endl;
+	//if(right != nullptr) cout << "right: " << right->number << endl;
 	
-	if(left->next->next != nullptr){
-		left->next = qsort(left->next, numeric);
-	}
-	if(right->next->next != nullptr){
-		right->next  = qsort(right->next, numeric);
-	}
-	//cout<<left->next->number<<"-------!!!!--------"<<right->next->number<<endl;
-	Node* tempo = concatenate(left, right);
-	delete left;
-	delete right;
-	return tempo;
+	//cout << "call concatenate\n";
+	return concatenate(left, right, pivot);
 }
 
 void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric) {
-	if(numeric){
-		Node * tmp1 = left;
-		Node * tmp2 = right;
-		while(head != nullptr){
-			cout<<head->number<<"-----"<<pivot->number<<endl;
-			if(head->number <= pivot->number){				
-				left->next = head;
-				if(head->next != nullptr) left = left->next;
-				else	right->next = nullptr;
-				head = head->next;
+		
+	Node *current;
+	Node *current_left;
+	Node *current_right;
+
+	current = pivot->next;
+	current_left = nullptr;
+	current_right = nullptr;
+
+
+	//cout << "PIVOT: " << pivot->number << endl;
+
+	while(current != nullptr){
+		
+		//cout << endl << "CURRENT NUMBER: "<< current->number << endl;
+
+
+		if(current->number <= pivot->number){
+			
+			if(left == nullptr){
+				left = current;
+				current_left = left;
+				//cout << "TOP OF LEFT:   " << left->number << endl;
+			} else{
+				//cout << "current left:  " << current->number << endl;
+				current_left->next = current;
+				current_left = current_left->next;
+				//cout << "TOP OF LEFT:   " << left->number << endl;
 			}
-			else{
-				right->next = head;
-				if(head->next != nullptr)	right = right->next;
-				else{
-					left->next = nullptr;
-				}
-				head = head->next;
+		} 
+		if(current->number > pivot->number){
+			if(right == nullptr){
+				right = current;
+				current_right = right;
+				//cout << "TOP OF RIGHT:  " << right->number << endl;
+			} else{
+				//cout << "current right: " << current->number << endl;
+				current_right->next = current;
+				current_right = current_right->next;
 			}
 		}
-		left->next = pivot;
-		left->next->next = nullptr;
-		
-		right = tmp2;
-		left = tmp1;
-//		cout << right->next->number<< " ";
-//		cout << left->next->number<<endl;;
+		//cout << "current: " << current->number << endl;
+		//cout << "current next: " << current->next << endl;
+		current = current->next;
 	}
+	if(current_left != nullptr)	current_left->next = nullptr;
+	if(current_right != nullptr) current_right->next = nullptr;
+	//if(left != nullptr) cout << "END LEFT:  " << left->number << endl;
+	//if(right != nullptr) cout << "END RIGHT: " << right->number << endl;
+	//cout << "CURRENT LAST: " << current->number << endl;
 }
 
-Node *concatenate(Node *left, Node *right) {	
-	Node * tmp = left->next;
-	
-	while(left->next != nullptr){
-		cout<<left->number<<" ";
-		left = left->next;
+Node *concatenate(Node *left, Node *right, Node *pivot) {
+
+	Node *current;
+
+	//cout << "inside concatenate\n";
+
+	if(left == nullptr){
+		pivot->next = right;
+		return pivot;
 	}
-	left->next = right->next;
-	left = right->next;
-	
-	
-	while(left->next != nullptr){
-		cout<<left->number<<" ";
-		left = left->next;
+	if(right == nullptr){
+		current = left;
+		while(current->next != nullptr) current = current->next;
+		current->next = pivot;
+		pivot->next = nullptr;
+		return left;
 	}
-	left->next = nullptr;
-	cout<<endl;
-	return tmp;
+	else{
+		current = left;
+		while(current->next != nullptr) current = current->next;
+		current->next = pivot;
+		current->next->next = right;
+		return left;
+	}
 }

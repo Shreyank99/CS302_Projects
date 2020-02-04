@@ -34,7 +34,25 @@ Node *msort(Node *head, bool numeric) {
 }
 
 void split(Node *head, Node *&left, Node *&right) {
+  if(head == nullptr || head -> next == nullptr) {
+    *left = *head;
+    right = nullptr;
+    return;
+  }
 
+  Node *tortise = head;
+  Node *hare = head->next;
+
+  while(hare != nullptr) {
+    hare = hare->next;
+    if(hare != nullptr) {
+      tortise = tortise->next;
+      hare = hare->next;
+    }
+  }
+
+  *left = *head;
+  *right = *(tortise->next);
 }
 
 Node *merge(Node *left, Node *right) {

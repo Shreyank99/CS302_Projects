@@ -7,30 +7,30 @@
 // Prototypes
 
 Node *msort(Node *head, bool numeric);
-void  split(Node *head, Node *&left, Node *&right);
-Node *merge(Node *left, Node *right);
+void split(Node *head, Node *&left, Node *&right);
+Node *merge(Node *left, Node *right, bool numeric);
 
 // Implementations
 
 void merge_sort(List &l, bool numeric) {
-
-
-
+  l.head->next = msort(l.head->next, numeric);
 }
 
 Node *msort(Node *head, bool numeric) {
-	Node* left;
-	Node* right;
+	if (head == nullptr || head->next == nullptr)
+    return head;
 
-	if (head->next == nullptr || head->next->next == nullptr)
-		return head;
+  Node *left;
+  Node *right;
 
-	split(head, left, right);
+  split(head, left, right);
 
-	left = msort(left, numeric);
-	right = msort(right, numeric);
+  msort(left, numeric);
+  msort(right, numeric);
 
-	return merge(left, right);
+  head = merge(left, right, numeric);
+
+  return head;
 }
 
 void split(Node *head, Node *&left, Node *&right) {
@@ -55,7 +55,7 @@ void split(Node *head, Node *&left, Node *&right) {
   *right = *(tortise->next);
 }
 
-Node *merge(Node *left, Node *right) {
+Node *merge(Node *left, Node *right, bool numeric) {
 	if(left == nullptr)
     return right;
   else if(right == nullptr)
@@ -65,11 +65,11 @@ Node *merge(Node *left, Node *right) {
 
   if(left->number <= right->number) {
     result = left;
-    result->next = merge(left->next, right);
+    result->next = merge(left->next, right, numeric);
   }
   else {
     result = right;
-    result->next = merge(left, right->next);
+    result->next = merge(left, right->next, numeric);
   }
   return result;
 }

@@ -38,19 +38,20 @@ void split(Node *head, Node *&left, Node *&right) {
 }
 
 Node *merge(Node *left, Node *right) {
-	Node* temp = left;
+	if(left == nullptr)
+    return right;
+  else if(right == nullptr)
+    return left;
   
-  while(left->next != nullptr) {
-      left = left->next;
-  }
+  Node *result = nullptr;
 
-  left->next = right->next;
-
-  while(left->next != nullptr) {
-      left = left->next;
+  if(left->number <= right->number) {
+    result = left;
+    result->next = merge(left->next, right);
   }
-  
-  left->next = nullptr;
-  
-  return temp;
+  else {
+    result = right;
+    result->next = merge(left, right->next);
+  }
+  return result;
 }

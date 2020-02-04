@@ -23,7 +23,6 @@ void quick_sort(List &l, bool numeric) {
 //Head = first element of list of nodes
 Node *qsort(Node *head, bool numeric) {
 
-	//cout << "qsort begin\n";
 
 	Node *left;
 	Node *right;
@@ -32,19 +31,12 @@ Node *qsort(Node *head, bool numeric) {
 	left = nullptr;
 	right = nullptr;
 	pivot = head;
-	//cout << "head in qsort: " << head->number << endl;
-	//cout << "left before anything: " << left << endl;
+	
 	if(head->next != nullptr)	partition(head, pivot, left, right, numeric);	
 
-	//cout << "after partition\n";
 	if(left != nullptr) if(left->next != nullptr) left = qsort(left, numeric);
 	if(right != nullptr) if(right->next != nullptr) right = qsort(right, numeric);
 
-	//cout << "before con call\n";
-	//if(left != nullptr) cout << "left:  " << left->number << endl;
-	//if(right != nullptr) cout << "right: " << right->number << endl;
-	
-	//cout << "call concatenate\n";
 	return concatenate(left, right, pivot);
 }
 
@@ -59,53 +51,65 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 	current_right = nullptr;
 
 
-	//cout << "PIVOT: " << pivot->number << endl;
-
-	while(current != nullptr){
-		
-		//cout << endl << "CURRENT NUMBER: "<< current->number << endl;
-
-
-		if(current->number <= pivot->number){
+	if(numeric){
+		while(current != nullptr){
 			
-			if(left == nullptr){
-				left = current;
-				current_left = left;
-				//cout << "TOP OF LEFT:   " << left->number << endl;
-			} else{
-				//cout << "current left:  " << current->number << endl;
-				current_left->next = current;
-				current_left = current_left->next;
-				//cout << "TOP OF LEFT:   " << left->number << endl;
+			if(current->number <= pivot->number){
+				
+				if(left == nullptr){
+					left = current;
+					current_left = left;
+				} else{
+					current_left->next = current;
+					current_left = current_left->next;
+				}
+			} 
+			if(current->number > pivot->number){
+				if(right == nullptr){
+					right = current;
+					current_right = right;
+				} else{
+					current_right->next = current;
+					current_right = current_right->next;
+				}
 			}
-		} 
-		if(current->number > pivot->number){
-			if(right == nullptr){
-				right = current;
-				current_right = right;
-				//cout << "TOP OF RIGHT:  " << right->number << endl;
-			} else{
-				//cout << "current right: " << current->number << endl;
-				current_right->next = current;
-				current_right = current_right->next;
-			}
+			current = current->next;
 		}
-		//cout << "current: " << current->number << endl;
-		//cout << "current next: " << current->next << endl;
-		current = current->next;
+		if(current_left != nullptr)	current_left->next = nullptr;
+		if(current_right != nullptr) current_right->next = nullptr;
 	}
-	if(current_left != nullptr)	current_left->next = nullptr;
-	if(current_right != nullptr) current_right->next = nullptr;
-	//if(left != nullptr) cout << "END LEFT:  " << left->number << endl;
-	//if(right != nullptr) cout << "END RIGHT: " << right->number << endl;
-	//cout << "CURRENT LAST: " << current->number << endl;
+	else{
+		while(current != nullptr){
+
+			if(current->string <= pivot->string){
+				
+				if(left == nullptr){
+					left = current;
+					current_left = left;
+				} else{
+					current_left->next = current;
+					current_left = current_left->next;
+				}
+			} 
+			if(current->string > pivot->string){
+				if(right == nullptr){
+					right = current;
+					current_right = right;
+				} else{
+					current_right->next = current;
+					current_right = current_right->next;
+				}
+			}
+			current = current->next;
+		}
+		if(current_left != nullptr)	current_left->next = nullptr;
+		if(current_right != nullptr) current_right->next = nullptr;
+	}
 }
 
 Node *concatenate(Node *left, Node *right, Node *pivot) {
 
 	Node *current;
-
-	//cout << "inside concatenate\n";
 
 	if(left == nullptr){
 		pivot->next = right;

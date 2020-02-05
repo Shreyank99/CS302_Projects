@@ -1,5 +1,11 @@
 # ignore object files
-.o
+*.o
 
 # ignore executible
 volsort
+
+# ignore large benchmarking files
+benchmarking/bench-10000
+benchmarking/bench-100000
+benchmarking/bench-1000000
+benchmarking/bench-10000000

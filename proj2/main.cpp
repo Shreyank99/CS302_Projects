@@ -38,8 +38,8 @@ void parse_command_line_options(int argc, char *argv[], int &mode, bool &numeric
                     mode = MODE_MERGE;
                 } else if (strcasecmp(optarg, "quick") == 0) {
                     mode = MODE_QUICK;
-		} else if (strcasecmp(optarg, "oblivious") == 0) {
-		  mode = MODE_OBLIVIOUS;
+		        } else if (strcasecmp(optarg, "oblivious") == 0) {
+		            mode = MODE_OBLIVIOUS;
                 } else {
                     usage(1);
                 }
@@ -83,6 +83,8 @@ int main(int argc, char *argv[]) {
             break;
         case MODE_QUICK:
             quick_sort(data, numeric);
+            break;
+        case MODE_OBLIVIOUS:
             break;
     }
     

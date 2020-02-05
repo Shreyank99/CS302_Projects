@@ -37,8 +37,7 @@ Node *msort(Node *head, bool numeric) {
 
   left = msort(left, numeric);
   right = msort(right, numeric);
-
-  return merge(left, right, numeric);
+  return  merge(left, right, numeric);
 }
 
 void split(Node *head, Node *&left, Node *&right) {
@@ -59,7 +58,7 @@ void split(Node *head, Node *&left, Node *&right) {
 }
 
 Node *merge(Node *left, Node *right, bool numeric) {
-	if(left == nullptr)
+  if(left == nullptr)
     return right;
   else if(right == nullptr)
     return left;

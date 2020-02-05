@@ -62,7 +62,7 @@ GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2
 
 1. Discuss the relative performance of each sorting method and try to explain the differences.
 
-    In our test, QSort was a clear winner, followed by Merge and STL which were very close. Finally Quick was, surprisingly, last.
+    In our test, QSort was a clear winner, followed by Merge and STL which were very close. Finally Quick was, surprisingly, last. This result could be due to a poor implementation of Quick, or it could just be a result of the compiler and specific machine the sorts were tested on.
 
 2. What do these results reveal about the relationship between theoretical complexity discussed in class and actual performance?
 

@@ -1,8 +1,9 @@
 // merge.cpp
 
 #include "volsort.h"
-
 #include <iostream>
+
+using namespace std;
 
 // Prototypes
 
@@ -13,17 +14,26 @@ Node *merge(Node *left, Node *right, bool numeric);
 // Implementations
 
 void merge_sort(List &l, bool numeric) {
+  cout << "MAIN START" << endl;
   l.head->next = msort(l.head->next, numeric);
+  cout << "MAIN END" << endl;
 }
 
 Node *msort(Node *head, bool numeric) {
-	if (head == nullptr || head->next == nullptr)
+  cout << "MSORT|head = " << head->number << endl;
+
+	if (head == nullptr || head->next == nullptr) {
+    cout << "MSORT|base_case" << endl;
     return head;
+  }
 
   Node *left;
   Node *right;
 
   split(head, left, right);
+  
+  cout << "MSORT|left = " << left->number << endl;
+  cout << "MSORT|right = " << right->number << endl;
 
   msort(left, numeric);
   msort(right, numeric);
@@ -35,6 +45,7 @@ Node *msort(Node *head, bool numeric) {
 
 void split(Node *head, Node *&left, Node *&right) {
   if(head == nullptr || head -> next == nullptr) {
+    cout << "SPLIT|length_one" << endl;
     *left = *head;
     right = nullptr;
     return;
@@ -51,8 +62,9 @@ void split(Node *head, Node *&left, Node *&right) {
     }
   }
 
-  *left = *head;
-  *right = *(tortise->next);
+  left = head;
+  right = tortise->next;
+  tortise->next = nullptr;
 }
 
 Node *merge(Node *left, Node *right, bool numeric) {

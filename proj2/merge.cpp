@@ -14,16 +14,16 @@ Node *merge(Node *left, Node *right, bool numeric);
 // Implementations
 
 void merge_sort(List &l, bool numeric) {
-  cout << "MAIN START" << endl;
+  //cout << "MAIN START" << endl;
   l.head->next = msort(l.head->next, numeric);
-  cout << "MAIN END" << endl;
+  //cout << "MAIN END" << endl;
 }
 
 Node *msort(Node *head, bool numeric) {
-  cout << "MSORT|head = " << head->number << endl;
+  //cout << "MSORT|head = " << head->number << endl;
 
 	if (head == nullptr || head->next == nullptr) {
-    cout << "MSORT|base_case" << endl;
+    //cout << "MSORT|base_case" << endl;
     return head;
   }
 
@@ -32,25 +32,16 @@ Node *msort(Node *head, bool numeric) {
 
   split(head, left, right);
   
-  cout << "MSORT|left = " << left->number << endl;
-  cout << "MSORT|right = " << right->number << endl;
+  //cout << "MSORT|left = " << left->number << endl;
+  //cout << "MSORT|right = " << right->number << endl;
 
-  msort(left, numeric);
-  msort(right, numeric);
+  left = msort(left, numeric);
+  right = msort(right, numeric);
 
-  head = merge(left, right, numeric);
-
-  return head;
+  return merge(left, right, numeric);
 }
 
 void split(Node *head, Node *&left, Node *&right) {
-  if(head == nullptr || head -> next == nullptr) {
-    cout << "SPLIT|length_one" << endl;
-    *left = *head;
-    right = nullptr;
-    return;
-  }
-
   Node *tortise = head;
   Node *hare = head->next;
 
@@ -75,13 +66,26 @@ Node *merge(Node *left, Node *right, bool numeric) {
   
   Node *result = nullptr;
 
-  if(left->number <= right->number) {
-    result = left;
-    result->next = merge(left->next, right, numeric);
+  if(numeric) {
+    if(left->number <= right->number) {
+      result = left;
+      result->next = merge(left->next, right, numeric);
+    }
+    else {
+      result = right;
+      result->next = merge(left, right->next, numeric);
+    }
   }
   else {
-    result = right;
-    result->next = merge(left, right->next, numeric);
+    if(left->string <= right->string) {
+      result = left;
+      result->next = merge(left->next, right, numeric);
+    }
+    else {
+      result = right;
+      result->next = merge(left, right->next, numeric);
+    }
   }
+
   return result;
 }

@@ -17,13 +17,13 @@ GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2
 
 | Mode    | Size     | Elapsed Time  |
 |---------|----------|---------------|
-| SL     | 10       | 0.002         | 
-| ST     | 100      | 0.002         |
-| ST    | 1000     | 0.006         | 
-| ST    | 10000    | 0.023         | 
-| ST    | 100000   | 0.206         | 
-| ST   | 1000000  | 2.364         | 
-| ST     | 10000000 | 25.748        |
+| OBLIVIOUS | 10       | 0.002       | 
+| OBLIVIOUS | 100      | 0.002       |
+| OBLIVIOUS | 1000     | 0.004       | 
+| OBLIVIOUS | 10000    | 0.019       | 
+| OBLIVIOUS | 100000   | 0.161       | 
+| OBLIVIOUS | 1000000  | 1.584       | 
+| OBLIVIOUS | 10000000 | 15.942      |
 | ...     | ...      | ...           | 
 | STL     | 10       | 0.002         | 
 | STL     | 100      | 0.002         |

@@ -63,8 +63,13 @@ void split(Node *head, Node *&left, Node *&right) {
 }
 
 Node *merge(Node *left, Node *right, bool numeric) {
+  if(left == nullptr)
+    return right;
+  else if(right == nullptr)
+    return left;
+  
   // hold temp value for making swaps
-	Node *temp = nullptr;
+  Node *temp = nullptr;
 
   // if the left list starts higher then the right, switch them around
   if((numeric && (left->number > right->number)) || (!numeric && (left->string > right->string))) {

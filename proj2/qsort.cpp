@@ -5,67 +5,55 @@
 #include "volsort.h"
 #include <algorithm>
 #include <iostream>
-#include <vector>
 #include <array>
 using namespace std;
 
-//used by qsort 
-int int_cmp(const void *a, const void *b);			//compares ints of the Nodes
-int cstring_cmp(const void *a, const void *b);		//compares strings of the Nodes
+//Prototype for comparison functions
+int int_cmp(const void *a, const void *b);
+int cstring_cmp(const void *a, const void *b);
+
 
 void qsort_sort(List &l, bool numeric) {	
-	Node *cur_node = l.head->next;		//traverses the list
-	int list_size = l.size;				//lists size	
-	int count = 0;						//					
+	Node *cur_node = l.head->next;
+	int list_size = l.size;	
+	int count = 0; 
+	Node* my_nodes[list_size];
+	//Copy the content of the list into array to be sorted
+	while(cur_node != nullptr){
+		my_nodes[count] = cur_node;
+		count++;
+		cur_node = cur_node->next;
+	}
+	if(numeric)	qsort((void *)my_nodes, l.size, sizeof(Node*), int_cmp);
+	else		qsort((void *)my_nodes, l.size, sizeof(Node*), cstring_cmp);
 	
-	//if the comparison is numeric
-	if(numeric){
-		//stores the number values of the nodes in the array
-		int my_list[list_size];
-		while(cur_node != nullptr){
-			my_list[count] = cur_node->number;
-			count++;
-			cur_node = cur_node->next;
+	//Set the first list element to the first element of node array
+	l.head->next = my_nodes[0];
+	
+	//Rearrange list node pointers to match sorted array nodes
+	for(int i = 0; i < int(l.size); i++){
+	    if(i == int(l.size-1)){
+			my_nodes[i]->next = NULL;
 		}
-		//uses qsort to sort the array
-		qsort((void *)my_list, l.size, sizeof(int), int_cmp);
-
-		//clears the List and add pushes it in sorted order according to qsort
-		l.Clear();
-		for(int i =list_size-1; i >= 0; i--){
-			l.Push_Front(to_string(my_list[i]));
+		else{
+			my_nodes[i]->next = my_nodes[i+1];
 		}
 	}
-	//if the comparison is alphanumeric
-	else{
-		//stores the string values of the nodes in the array
-		string my_list[list_size];
-		while(cur_node != nullptr){
-			my_list[count] = cur_node->string;
-			count++;
-			cur_node = cur_node->next;
-		}
-		//uses qsort to sort the array
-		qsort((void *)my_list, l.size, sizeof(string), cstring_cmp); 
-		
-		//clears the List and add pushes it in sorted order according to qsort
-		l.Clear();
-		for(int i =list_size-1; i >= 0; i--){
-			l.Push_Front("" + my_list[i]);
-		}
-	}
-
 }
 
-//compares number values of Nodes a and b with help of qsort
+//Return the difference of a->number and b->number
+//If difference is greater than 0, a goes after b
+//If difference is smaller than 0 or equal to, a goes before b 
 int int_cmp(const void *a, const void *b){
-	int ia = (*(int* )a);
-	int ib = (*(int *)b);
-	return (ia- ib);
+	Node* ia = (*(Node** )a);
+	Node* ib = (*(Node** )b);
+	return (ia->number - ib->number);
 }
-//compares string values of Nodes a and b by with help of qsort
+//Return the difference of a->string and b->string
+//If difference is greater than 0, a goes after b
+//If difference is smaller than 0 or equal to, a goes before b 
 int cstring_cmp(const void *a, const void *b){
-	string ia = (*(string *)a);
-	string ib = (*(string *)b);
-	return strcmp(ia.c_str(),ib.c_str());
+	Node* ia = (*(Node **)a);
+	Node* ib = (*(Node **)b);
+	return strcmp(ia->string.c_str(),ib->string.c_str());
 }

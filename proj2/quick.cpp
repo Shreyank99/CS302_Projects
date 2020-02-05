@@ -27,7 +27,6 @@ void quick_sort(List &l, bool numeric) {
  */
 Node *qsort(Node *top, bool numeric) {
 
-
 	Node *left;			//all values less than or equal to pivot
 	Node *right;		//all values greater than pivot
 
@@ -134,16 +133,16 @@ Node *concatenate(Node *left, Node *right, Node *pivot) {
 
 	Node *current;					//traverses the left list to add the pivot and right after to it
 
-	//if the left list has no values its just the pivot and the right list
+	//if left node is empty, concatenate pivot and right node
 	if(left == nullptr){
 		pivot->next = right;
 		return pivot;
 	}
 
-	//if the right list has no values its just the left list and the pivot
+	//if right node is empty, concatenate left and pivot node
 	if(right == nullptr){
 		current = left;
-		//gets the last Node in the left list
+		//Loop through left node until you reach the last element and then concatenate pivot to it.
 		while(current->next != nullptr) current = current->next;
 		current->next = pivot;
 		pivot->next = nullptr;
@@ -154,9 +153,10 @@ Node *concatenate(Node *left, Node *right, Node *pivot) {
 	//total of    left list---pivot---right list
 	else{
 		current = left;
-		//gets the last Node in the left list
+		//Loop through left node until you reach the last element and then concatenate pivot to it.
 		while(current->next != nullptr) current = current->next;
 		current->next = pivot;
+		//Concatenate pivot to right node
 		current->next->next = right;
 		return left;
 	}

@@ -13,7 +13,7 @@ parser.add_argument('count', metavar='N', type=int, nargs=1,
 args = parser.parse_args()
 count = args.count[0]
 
-randList = [random.randint(0, 200000000) for i in range(count)]
+randList = [random.randint(0, 500000000) for i in range(count)]
 
 for i in randList:
     print(i)

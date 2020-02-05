@@ -59,33 +59,53 @@ void split(Node *head, Node *&left, Node *&right) {
 }
 
 Node *merge(Node *left, Node *right, bool numeric) {
-	if(left == nullptr)
-    return right;
-  else if(right == nullptr)
-    return left;
-  
-  Node *result = nullptr;
-
-  if(numeric) {
-    if(left->number <= right->number) {
-      result = left;
-      result->next = merge(left->next, right, numeric);
-    }
-    else {
-      result = right;
-      result->next = merge(left, right->next, numeric);
+	Node *temp = nullptr;
+  if(numeric){
+    if(left->number > right->number) {
+      temp = left;
+      left = right;
+      right = temp;
     }
   }
   else {
-    if(left->string <= right->string) {
-      result = left;
-      result->next = merge(left->next, right, numeric);
-    }
-    else {
-      result = right;
-      result->next = merge(left, right->next, numeric);
+    if(left->string > right->string) {
+      temp = left;
+      left = right;
+      right = temp;
     }
   }
 
-  return result;
+  Node *myLeft = left;
+  Node *myRight = right;
+
+  while(myLeft->next != nullptr && myRight != nullptr) {
+    if(numeric && (myLeft->next->number > myRight->number)) {
+      temp = myRight->next;
+      myRight->next = myLeft->next;
+      myLeft->next = myRight;
+      myRight = temp;
+    }
+    else if(!numeric && (myLeft->next->string > myRight->string)) {
+      temp = myRight->next;
+      myRight->next = myLeft->next;
+      myLeft->next = myRight;
+      myRight = temp;
+    }
+    myLeft = myLeft->next;
+  }
+
+  if(myLeft->next == nullptr) {
+    myLeft->next = myRight;
+  }
+
+  else {
+    while(myLeft->next != nullptr) {
+      myLeft = myLeft -> next;
+    }
+    myLeft->next = myRight;
+  }
+
+
+  return left;
+  
 }

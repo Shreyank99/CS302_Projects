@@ -62,15 +62,15 @@ GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2
 
 1. Discuss the relative performance of each sorting method and try to explain the differences.
 
-    TO DO
+    In our test, QSort was a clear winner, followed by Merge and STL which were very close. Finally Quick was, surprisingly, last.
 
 2. What do these results reveal about the relationship between theoretical complexity discussed in class and actual performance?
 
-    TO DO
+    Even if theoretical complexity is supposedly better, a lot of the performance comes down to implementation and the specific machine the sort is run on. Quick is less complex than Merge, yet in our tests Merge beat it. The machine likely has a lot to do with this- a position that is solidified that on Hydra14, the test machine, QSort beat no sort at all.
 
 3. In your opinion, which sorting mode is the best? Justify your conclusion by examining the trade-offs for the chosen mode.
     
-    TO DO
+    Even though Quick is theoretically faster, the speed of Merge combined with its relatively simple implementation makes if very attractive. Additionally, Merge can be stable, which in some cases is advantageous. Its relative ease of implementation and respectable performance make it very attractive. In most cases, though, the STL sort is a safe bet and easiest of all. If QSort reliably outperforms STL as in our testing, it may be worth the extra hassle over STL.
 
 
 ### Summary of Individual Contributions

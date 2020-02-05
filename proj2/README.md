@@ -1,6 +1,12 @@
-## COSC_302 - Proj2
+## COSC_302 - Project 02: Sorting List-Based Strings and Numbers
 
 ### Team-Members
+
+| Name           | GitHub Handle  | UTK NetID  |
+|----------------|----------------|------------|
+| Hunter Kitts   | hkitts         | hkitts2    |
+| Shreyank Patel | spatel912020   | spatel91   |
+| Andrew Whitus  | awhitus1       | awhitus1   |
 
 ### Benchmarking
 

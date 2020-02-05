@@ -36,9 +36,18 @@
 | QUICK   | 10000    | 0.022         | 
 | QUICK   | 100000   | 0.206         | 
 | QUICK   | 1000000  | 2.785         | 
-| QUICK   | 10000000 | 34.408        | 
-| ...     | ...      | ...           | 
+| QUICK   | 10000000 | 34.408        |  
 
+
+### Benchmarking Reflections
+
+1. Discuss the relative performance of each sorting method and try to explain the differences.
+
+2. What do these results reveal about the relationship between theoretical complexity discussed in class and actual performance?
+
+3. In your opinion, which sorting mode is the best? Justify your conclusion by examining the trade-offs for the chosen mode.
+
+### Summary of Individual Contributions
 Tasks:  
 - main.cpp  
 - list.cpp  <- shrey/Hunter (DONE)

@@ -1,7 +1,7 @@
 // merge.cpp
 
 #include "volsort.h"
-#include <iostream>
+#include <iostream>   //for testing
 
 using namespace std;
 
@@ -13,47 +13,52 @@ Node *merge(Node *left, Node *right, bool numeric);
 
 // Implementations
 
+//kicks off the merge sort
 void merge_sort(List &l, bool numeric) {
-  //cout << "MAIN START" << endl;
   l.head->next = msort(l.head->next, numeric);
-  //cout << "MAIN END" << endl;
 }
 
 Node *msort(Node *head, bool numeric) {
-  //cout << "MSORT|head = " << head->number << endl;
-
+  // checks base case
 	if (head == nullptr || head->next == nullptr) {
-    //cout << "MSORT|base_case" << endl;
     return head;
   }
 
+  // get left and right sub lists
   Node *left;
   Node *right;
-
   split(head, left, right);
   
-  //cout << "MSORT|left = " << left->number << endl;
-  //cout << "MSORT|right = " << right->number << endl;
-
+  // call sort on sub list
   left = msort(left, numeric);
   right = msort(right, numeric);
-  return  merge(left, right, numeric);
+
+  // return combined lists
+  return merge(left, right, numeric);
 }
 
 void split(Node *head, Node *&left, Node *&right) {
+  // pointers for tortise and hare meathod
   Node *tortise = head;
   Node *hare = head->next;
 
+  // run until hare reaches end of list
   while(hare != nullptr) {
     hare = hare->next;
+    // advance tortise once per loop and hare twice
     if(hare != nullptr) {
       tortise = tortise->next;
       hare = hare->next;
     }
   }
 
+  // return from beginning of list for left
   left = head;
+
+  // return right of tortis for right
   right = tortise->next;
+
+  // set nullptr to end left
   tortise->next = nullptr;
 }
 
@@ -63,28 +68,42 @@ Node *merge(Node *left, Node *right, bool numeric) {
   else if(right == nullptr)
     return left;
   
-  Node *result = nullptr;
+  // hold temp value for making swaps
+  Node *temp = nullptr;
 
-  if(numeric) {
-    if(left->number <= right->number) {
-      result = left;
-      result->next = merge(left->next, right, numeric);
-    }
-    else {
-      result = right;
-      result->next = merge(left, right->next, numeric);
-    }
-  }
-  else {
-    if(left->string <= right->string) {
-      result = left;
-      result->next = merge(left->next, right, numeric);
-    }
-    else {
-      result = right;
-      result->next = merge(left, right->next, numeric);
-    }
+  // if the left list starts higher then the right, switch them around
+  if((numeric && (left->number > right->number)) || (!numeric && (left->string > right->string))) {
+    temp = left;
+    left = right;
+    right = temp;
   }
 
-  return result;
+  // keep reference to left of list
+  Node *head = left;
+
+  // loop through left, inserting right value whenever
+  //  it is lower than left until end end of one side is
+  //  reached
+  while(left->next != nullptr && right != nullptr) {
+    if((numeric && (left->next->number > right->number)) || (!numeric && (left->next->string > right->string))) {
+      temp = right->next;
+      right->next = left->next;
+      left->next = right;
+      right = temp;
+    }
+    left = left->next;
+  }
+
+  // if not at the end of left, add the rest of left to the list
+  if(left->next != nullptr) {
+    while(left->next != nullptr) {
+      left = left->next;
+    }
+  }
+
+  // track right on the end of left
+  left->next = right;
+
+  // return merged list
+  return head;  
 }

@@ -1,8 +1,5 @@
 // stl.cpp
-
 #include "volsort.h"
-//#include "node.cpp"
-
 #include <algorithm>
 #include <iostream>
 #include <vector>
@@ -12,16 +9,17 @@ using namespace std;
 void stl_sort(List &l, bool numeric) {	
 	vector<Node*> my_list;
 	Node* node = l.head->next;
+	//Copy content of list into vector to be sorted
 	while(node != nullptr){
 		my_list.push_back(node);
 		node = node->next;
 	}
-	
+	//Sort list using the correct node compare function 
 	if(numeric)	sort(my_list.begin(), my_list.end(), node_number_compare); 
-
 	else	sort(my_list.begin(), my_list.end(), node_string_compare); 
 
 	l.head->next = my_list[0];
+	//Rearrange list pointers to match order of sorted vector elements
 	for(int i = 0; i < int(my_list.size()); i++){
 		if(i == int(my_list.size()-1)){
 			my_list[i]->next = NULL;

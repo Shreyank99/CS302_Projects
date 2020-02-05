@@ -1,13 +1,10 @@
 // quick.cpp
-
 #include "volsort.h"
-
 #include <iostream>
 #include <string>
 
 using namespace std;
 // Prototypes
-
 Node *qsort(Node *head, bool numeric);
 void  partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric);
 Node *concatenate(Node *left, Node *right, Node *pivot);
@@ -16,9 +13,7 @@ Node *concatenate(Node *left, Node *right, Node *pivot);
 
 void quick_sort(List &l, bool numeric) {
 	l.head->next = qsort(l.head->next, numeric);
-	
 }
-
 
 //Head = first element of list of nodes
 Node *qsort(Node *head, bool numeric) {
@@ -108,15 +103,17 @@ void partition(Node *head, Node *pivot, Node *&left, Node *&right, bool numeric)
 }
 
 Node *concatenate(Node *left, Node *right, Node *pivot) {
-
+	
 	Node *current;
-
+	//if left node is empty, concatenate pivot and right node
 	if(left == nullptr){
 		pivot->next = right;
 		return pivot;
 	}
+	//if right node is empty, concatenate left and pivot node
 	if(right == nullptr){
 		current = left;
+		//Loop through left node until you reach the last element and then concatenate pivot to it.
 		while(current->next != nullptr) current = current->next;
 		current->next = pivot;
 		pivot->next = nullptr;
@@ -124,8 +121,10 @@ Node *concatenate(Node *left, Node *right, Node *pivot) {
 	}
 	else{
 		current = left;
+		//Loop through left node until you reach the last element and then concatenate pivot to it.
 		while(current->next != nullptr) current = current->next;
 		current->next = pivot;
+		//Concatenate pivot to right node
 		current->next->next = right;
 		return left;
 	}

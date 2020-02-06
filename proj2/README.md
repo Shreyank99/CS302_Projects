@@ -15,6 +15,8 @@ GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2
 
 ### Benchmarking
 
+(completed using Total Time)
+
 | Mode    | Size     | Elapsed Time  |
 |---------|----------|---------------|
 | OBLIVIOUS | 10       | 0.002       | 

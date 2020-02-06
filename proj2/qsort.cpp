@@ -1,11 +1,13 @@
-// qsort.cpp
+/* qsort.cpp
+ * Uses qsort and void * to sort the List
+ */
 #include <string.h>
 #include "volsort.h"
 #include <algorithm>
 #include <iostream>
 #include <array>
-
 using namespace std;
+
 //Prototype for comparison functions
 int int_cmp(const void *a, const void *b);
 int cstring_cmp(const void *a, const void *b);
@@ -44,7 +46,6 @@ int int_cmp(const void *a, const void *b){
 	Node* ib = (*(Node** )b);
 	return (ia->number - ib->number);
 }
-
 //Return the difference of a->string and b->string
 //If difference is greater than 0, a goes after b
 //If difference is smaller than 0 or equal to, a goes before b 

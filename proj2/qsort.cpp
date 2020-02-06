@@ -13,17 +13,14 @@ int cstring_cmp(const void *a, const void *b);
 
 void qsort_sort(List &l, bool numeric) {	
 	Node *cur_node = l.head->next;
-	int list_size = l.size;	
-	int count = 0; 
-	Node* my_nodes[list_size];
-	//Copy the content of the list into array to be sorted
+	vector <Node*> my_nodes;
+	//Copy the content of the list into vector to be sorted
 	while(cur_node != nullptr){
-		my_nodes[count] = cur_node;
-		count++;
+		my_nodes.push_back(cur_node);
 		cur_node = cur_node->next;
 	}
-	if(numeric)	qsort((void *)my_nodes, l.size, sizeof(Node*), int_cmp);
-	else		qsort((void *)my_nodes, l.size, sizeof(Node*), cstring_cmp);
+	if(numeric)	qsort(&my_nodes[0], l.size, sizeof(Node*), int_cmp);
+	else		qsort(&my_nodes[0], l.size, sizeof(Node*), cstring_cmp);
 	
 	//Set the first list element to the first element of node array
 	l.head->next = my_nodes[0];
@@ -31,10 +28,10 @@ void qsort_sort(List &l, bool numeric) {
 	//Rearrange list node pointers to match sorted array nodes
 	for(int i = 0; i < int(l.size); i++){
 	    if(i == int(l.size-1)){
-			my_nodes[i]->next = NULL;
+			my_nodes[i]->next = nullptr;
 		}
 		else{
-			my_nodes[i]->next = my_nodes[i+1];
+			if(my_nodes[i]->next != my_nodes[i+1])	my_nodes[i]->next = my_nodes[i+1];
 		}
 	}
 }

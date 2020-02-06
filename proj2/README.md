@@ -78,3 +78,16 @@ GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2
 
     Andrew implemented Merge Sort and worked some with Shreyank when troubleshooting QSort. Additionally, Andrew wrote a Python script to generate the random numbers needed for benchmarking. Andrew completed benchmarking and finallized the README.
 
+### Benchmarking Reflections	
+
+1. Discuss the relative performance of each sorting method and try to explain the differences.	
+	
+	In our test, QSort was a clear winner, followed by Merge and STL which were very close. Finally Quick was, surprisingly, last. This result could be due to a poor implementation of Quick, or it could just be a result of the compiler and specific machine the sorts were tested on.	
+
+2. What do these results reveal about the relationship between theoretical complexity discussed in class and actual performance?	
+
+	Even if theoretical complexity is supposedly better, a lot of the performance comes down to implementation and the specific machine the sort is run on. Quick is less complex than Merge, yet in our tests Merge beat it. The machine likely has a lot to do with this- a position that is solidified that on Hydra14, the test machine, QSort beat no sort at all.	
+
+3. In your opinion, which sorting mode is the best? Justify your conclusion by examining the trade-offs for the chosen mode.	
+
+	Even though Quick is theoretically faster, the speed of Merge combined with its relatively simple implementation makes if very attractive. Additionally, Merge can be stable, which in some cases is advantageous. Its relative ease of implementation and respectable performance make it very attractive. In most cases, though, the STL sort is a safe bet and easiest of all. If QSort reliably outperforms STL as in our testing, it may be worth the extra hassle over STL.

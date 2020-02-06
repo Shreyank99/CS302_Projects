@@ -86,7 +86,7 @@ GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2
 
 2. What do these results reveal about the relationship between theoretical complexity discussed in class and actual performance?	
 
-	Even if theoretical complexity is supposedly better, a lot of the performance comes down to implementation and the specific machine the sort is run on. Quick is less complex than Merge, yet in our tests Merge beat it. The machine likely has a lot to do with this- a position that is solidified that on Hydra14, the test machine, QSort beat no sort at all.	
+	Even if theoretical complexity is supposedly better, a lot of the performance comes down to implementation and the specific machine the sort is run on. Quick is less complex than Merge, yet in our tests Merge beat it. The machine likely has a lot to do with this.	
 
 3. In your opinion, which sorting mode is the best? Justify your conclusion by examining the trade-offs for the chosen mode.	
 

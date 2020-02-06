@@ -1,0 +1,12 @@
+1.
+	Shreyank Patel, Git handle: spatel912020
+	Andrew Whittus, Git handle: awhitus1
+	Hunter Kitts, Git handle: hkitts
+
+2.	Github repo: https://github.com/spatel912020/CS302_Projects.git
+
+3.	I worked on List, Qsort, STL. Hunter and I started working on Quick sort together and Hunter Finished it. Hunter also worked on Node.cpp. Andrew helped me debug Qsort and worked on Merge and running the benchmark test. 
+
+4a. I'm proud of my implementation of STL and Qsort. I'm also happy about each of us helping each other out. 
+
+4b. Hunter and I had trouble with quick sort. The recursive nature of the sort threw us off and we had trouble keep up with it. Although we got it to work, Quick sort is our slowest sorting algorithm. If given more time, we would probably work on making quick sort faster.  

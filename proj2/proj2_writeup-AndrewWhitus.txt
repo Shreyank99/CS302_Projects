@@ -1,0 +1,65 @@
+## COSC_302 - Project 02: Sorting List-Based Strings and Numbers | Writeup - Andrew Whitus
+
+GitHub Link: https://github.com/spatel912020/CS302_Projects/tree/master/proj2  
+(Repo Link: https://github.com/spatel912020/CS302_Projects.git)
+
+
+### Compile Info
+
+Makefile provided
+
+
+### Team-Members
+
+| Name                | GitHub Handle  | UTK NetID  |
+|---------------------|----------------|------------|
+| Hunter Kitts        | hkitts         | hkitts2    |
+| Shreyank Patel      | spatel912020   | spatel91   |
+| Andrew Whitus (me)  | awhitus1       | awhitus1   |
+
+
+### Partner Roles
+
+- Hunter Kitts
+
+   Node, List, Quick
+
+   Hunter implemented Node, worked with Shreyank on List, and completed Quick Sort.
+
+- Shreyank Patel 
+
+    List, QSort, STL, Quick
+
+    Shreyank worked with Hunter on List, and implemented both QSort and STL. Shreyank
+     started work on Quick Sort which Hunter followed up on. 
+
+- Andrew Whitus
+
+    Merge, Benchmark, QSort
+
+    Andrew implemented Merge Sort and worked some with Shreyank when troubleshooting QSort.
+     Additionally, Andrew wrote a Python script to generate the random numbers needed for
+     benchmarking. Andrew completed benchmarking and finalized the README.
+
+### Group Work Reflection
+
+Group work was a big help with a project this large. Working as a group became easier as time
+ went on. At first, I ran into some problems were as other team members worked on their parts,
+ it sometimes changed the functionality of my part. Regardless, we found a rhythm and each of
+ us was able to get something working another couldn't.
+
+### Satisfying and Unsatisfying Areas
+
+- Satisfying
+
+    Even though it seemed to take me forever, I found my implementation of merge sort to be
+     very satisfying. Any time I get recursion working the way I like, its always a good time.
+     Additionally, I really enjoyed doing the benchmarking, as I got to write a quick python script
+     and get results easily.
+
+- Unsatisfying
+
+    Our quick sort is slower than I would like it to be, but we all looked at it many times and what
+     we have is the best we could do. Additionally, the way stl sort is implemented with a vector is
+     not ideal but Shreyank found that the easiest way to get the iterators needed. With more time,
+     it would be ideal to optimise both of these.

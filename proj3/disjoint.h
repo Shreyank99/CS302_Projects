@@ -56,6 +56,7 @@ class DisjointSetByRankWPC : public DisjointSet {
     int Union(int s1, int s2);
     int Find(int element); 
     void Print();
+	int getLinks(int e);
 
   protected:
     vector <int> links;

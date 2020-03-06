@@ -21,12 +21,12 @@ int DisjointSetByRankWPC::Union(int s1, int s2)
 {
   int p, c;
 
-  if (links[s1] != -1 || links[s2] != -1) {
-    cerr << "Must call union on a set, and not just an element.\n";
-    exit(1);
-  }
+//  if (links[s1] != -1 || links[s2] != -1) {
+//	  cerr << "Must call union on a set, and not just an element.\n";
+//	  exit(1);
+//  }
 
-  if (ranks[s1] > ranks[s2]) {
+  if (ranks[s1] >= ranks[s2]) {
     p = s1;
     c = s2;
   } else {
@@ -63,7 +63,8 @@ int DisjointSetByRankWPC::Find(int e)
     c = links[e];
     links[e] = p;
     e =c;
-  }
+ }
+
   return p;
 }
 
@@ -72,15 +73,41 @@ void DisjointSetByRankWPC::Print()
   int i;
 
   printf("\n");
-  printf("Node:  ");
-  for (i = 0; i < links.size(); i++) printf("%3d", i);  
+  printf("Node:  \n");
+  int count = 0;
+  for (i = 0; i < links.size(); i++){
+	  printf("%3d", i);  
+	  if(count != 0 && count%9 == 0){
+		  cout<<endl;
+		  count = 0;
+	  }
+	  else count++;
+  }
   printf("\n");
-
-  printf("Links: ");
-  for (i = 0; i < links.size(); i++) printf("%3d", links[i]);  
+ count = 0;
+  printf("Links: \n");
+  for (i = 0; i < links.size(); i++){
+	  printf("%3d", links[i]);  	
+	  if(count != 0 && count%9 == 0){
+		  cout<<endl;
+		  count = 0;
+	  }
+	  else count++;
+  }
   printf("\n");
-
-  printf("Ranks: ");
-  for (i = 0; i < links.size(); i++) printf("%3d", ranks[i]);  
+  count = 0;
+  printf("Ranks: \n");
+  for (i = 0; i < links.size(); i++){
+	printf("%3d", ranks[i]);
+	if(count != 0 && count%9 == 0){
+	  cout<<endl;
+	  count = 0;
+	 }
+	 else count++;
+  }
   printf("\n\n");
+}
+
+int DisjointSetByRankWPC::getLinks(int e){
+	return links[e];
 }

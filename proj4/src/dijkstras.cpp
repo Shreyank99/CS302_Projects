@@ -14,7 +14,7 @@ class graph_Node{
 		int y;
 		int distance_from_start;
 		map <int, char> neighbor;
-		set <int> path;
+		graph_Node* prev;
 };
 
 int main(int argc, char *argv[]) {
@@ -29,6 +29,7 @@ int main(int argc, char *argv[]) {
 	multimap <int, int> distance_map;
 	multimap <int, int>::iterator distance_it;
 	set <int>::iterator path_it;
+	set <int> path;
 	int x_y = 0; 
 	int cur_xy = 0;
 	int temp_count = 0;
@@ -91,14 +92,15 @@ int main(int argc, char *argv[]) {
 	
 	distance_map.insert(pair<int, int>(0, cur_xy));
 
-	cur_node->path.insert((cur_xy));
+	cur_node->prev = NULL;
 
 	while(int(graph_route.size()) != map_row*map_col){
+		//cout<<graph_route.size()<<endl;
 		for(neighbor_it = cur_node->neighbor.begin(); neighbor_it != cur_node->neighbor.end(); neighbor_it++){
 			if(my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->distance_from_start > (cur_node->distance_from_start + tile_points[my_map[cur_node->x][cur_node->y]])){
 				my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->distance_from_start = (cur_node->distance_from_start + tile_points[my_map[cur_node->x][cur_node->y]]);
-				my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->path = cur_node->path;
-				my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->path.insert((neighbor_it->first));
+				my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->prev = cur_node;
+				//my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->path.insert((neighbor_it->first));
 				distance_map.insert(pair<int, int>(my_graph[neighbor_it->first/map_col][neighbor_it->first%map_col]->distance_from_start, neighbor_it->first));
 			}
 		}
@@ -116,13 +118,20 @@ int main(int argc, char *argv[]) {
 	}
 
 	cout<<my_graph[finish_x][finish_y]->distance_from_start<<endl;
-	path_it = my_graph[finish_x][finish_y]->path.begin();
-	
-	while(path_it != my_graph[finish_x][finish_y]->path.end()){
+	cur_node = my_graph[finish_x][finish_y];
+
+	while(cur_node != NULL){
+		path.insert(cur_node->x*map_col+cur_node->y);
+		cur_node = cur_node->prev;
+	}
+
+	path_it = path.begin();
+
+	while(path_it != path.end()){
 		cout<<(*path_it)/map_col<<" "<<(*path_it)%map_col<<endl;
 		path_it++;
 	}
-	
+
 	for(int i = 0; i < int(my_map.size()); i++){
 		for(int j = 0; j < int(my_map[i].size()); j++){	
 			delete my_graph[i][j];

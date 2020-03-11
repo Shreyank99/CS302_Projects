@@ -28,3 +28,34 @@ Output
     Cost
     [(ROW_0, COL_0), ...]
 
+Benchmark Test command
+-----------------------
+	
+	time ./src/dijkstras < test_maps/graph_map_10.txt >/dev/null
+	time ./src/dijkstras < test_maps/graph_map_20.txt >/dev/null
+	time ./src/dijkstras < test_maps/graph_map_50.txt >/dev/null
+	time ./src/dijkstras < test_maps/graph_map_100.txt >/dev/null
+	time ./src/dijkstras < test_maps/graph_map_500.txt >/dev/null
+	time ./src/dijkstras < test_maps/graph_map_1000.txt >/dev/null
+
+Benchmark
+---------
+| N             | Elapsed Time  | Memory Usage   |
+|---------------|---------------|----------------|
+| 10            | 0.002         | ...            |
+| 20            | 0.003         | ...            |
+| 50            | 0.011         | ...            |
+| 100           | 0.038         | ...            |
+| 200           | 0.161         | ...            |
+| 500           | 1.108         | ...            |
+| 1000          | 4.920         | ...            |
+|---------------|---------------|----------------|
+
+
+Question
+--------
+
+	1. How did you represent the map as a graph?
+		I created a class called graph_Node which contained all the information i needed to create a graph. The class contained information such as x and y				 position, neighbors, and prev node with the closest distance to the source. 
+	2.	
+

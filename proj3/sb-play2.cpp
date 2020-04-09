@@ -117,7 +117,7 @@ main(int argc, char **argv)
 					next_elements++;
 				}
 				if(cur_points < count*s->colors[k]){
-					cur_points = count*s->colors[k];
+				cur_points = count*s->colors[k];
 					collect_i = k/s->c;
 					collect_j = k%s->c;
 				}

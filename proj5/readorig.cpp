@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 using namespace std; 
 typedef enum {Source, Sink, Dice, Word}Node_type;
@@ -37,7 +38,7 @@ class Graph{
 	public:
 		vector <Node *> nodes;
 		int BFS();
-		int canIspell(int, int);
+		int canIspell();
 		vector <int> spelling_id;
 		void Delete_halfGraph();
 		int minnodes;
@@ -47,9 +48,39 @@ class Graph{
 /*
 	Graph Functions
 */
-int Graph::BFS(int s, int t){
+
+int Graph::BFS(){
+	vector <Node *> queue;		//hold queue of nodes to check
+	vector <int> visited;		//hold queue of visited node ids
+	queue.push_back(nodes[0]);	//start with beginning node
+	
+	//run while there is something in queue
+	while(!queue.empty()){
+		Node* curr = queue[0];		//get first element of queue
+		queue.erase(queue.begin());	//remove first element from queue
+		
+		if(curr->type == Sink)		//return if this is target
+			return 1;
+			
+		//run through adj list
+		for(int i = 0; i < int(curr->adj.size()); i++){
+			Edge *thisEdge = curr->adj[i];		//edge we are looking at
+			Node *thisNode = thisEdge->to;		//to node we are looking at
+			int thisId = thisNode->id;			//nodes id
+			
+			//make sure original is 1 and we have not visited this node
+			if(thisEdge->original == 1 && !count(visited.begin(), visited.end(), thisId)){
+				visited.push_back(thisId);					//record node as visited
+				thisNode->backedge = thisEdge->reverse;		//set nodes backedge
+				queue.push_back(thisNode);					//add node to queue
+			}
+		}
+	}
+	
+	//if here, no path found
 	return 0;
 }
+
 
 /*
 	Main Execution

@@ -8,6 +8,11 @@
 using namespace std; 
 typedef enum {Source, Sink, Dice, Word}Node_type;
 
+
+/*
+	Class Definitions
+*/
+
 class Edge{
 	public:
 		class Node *to;
@@ -30,13 +35,25 @@ class Node{
 
 class Graph{
 	public:
-		vector <Node *> ndoes;
+		vector <Node *> nodes;
 		int BFS();
-		int canIspell();
+		int canIspell(int, int);
 		vector <int> spelling_id;
 		void Delete_halfGraph();
 		int minnodes;
 };
+
+
+/*
+	Graph Functions
+*/
+int Graph::BFS(int s, int t){
+	return 0;
+}
+
+/*
+	Main Execution
+*/
 
 int main(int argc, char* argv[]){
 	
@@ -51,7 +68,7 @@ int main(int argc, char* argv[]){
 	string line;
 	int id = 0;
 	ifstream dice_fin;
-		
+	
 	//Set up source node to be used later
 	Node *source_node = new Node();
 	source_node->id = id;

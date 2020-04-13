@@ -76,7 +76,7 @@ int Graph::BFS(){
 			}
 		}
 	}
-	
+
 	//if here, no path found
 	return 0;
 }
@@ -144,8 +144,8 @@ int main(int argc, char* argv[]){
 
 		to_source->from = dice_node;
 		to_source->to = source_node;
-		to_source->original = 1;
-		to_source->residual = 0;
+		to_source->original = 0;
+		to_source->residual = 1;
 		to_source->index = 0;
 
 		from_source->from = source_node;
@@ -210,8 +210,8 @@ int main(int argc, char* argv[]){
 
 					from_word->from = word_node;
 					from_word->to = my_graph->nodes[i];
-					from_word->original = 1;
-					from_word->residual = 0;
+					from_word->original = 0;
+					from_word->residual = 1;
 					from_word->index = dice_index;
 					dice_index++;
 				
@@ -258,8 +258,8 @@ int main(int argc, char* argv[]){
 			
 			from_sink->from = sink_node;
 			from_sink->to = my_graph->nodes[i];
-			from_sink->original = 1;
-			from_sink->residual = 0;
+			from_sink->original = 0;
+			from_sink->residual = 1;
 			from_sink->index = sink_index;
 			sink_index++;
 			

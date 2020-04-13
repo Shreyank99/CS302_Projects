@@ -1,3 +1,11 @@
+/*
+  Project 5: Word Dice
+  Name: Shreyank Patel and Andrew R Whitus
+
+  Brief description: Use network flow to see if words can be spelled with given dice.
+
+*/
+
 #include <cstdio>
 #include <iostream>
 #include <vector>

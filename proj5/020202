@@ -50,11 +50,6 @@ class Graph{
 
 int Graph::BFS(){
 	
-	//Clear all backedges that might have be set from prev bfs search
-	for(int i = 0; i < nodes.size(); i++){
-		nodes[i]->backedge = NULL;
-	}
-
 	vector <Node *> queue;		//hold queue of nodes to check
 	vector <int> visited;		//hold queue of visited node ids
 	queue.push_back(nodes[0]);	//start with beginning node
@@ -64,12 +59,8 @@ int Graph::BFS(){
 		Node* curr = queue[0];		//get first element of queue
 		queue.erase(queue.begin());	//remove first element from queue
 		
-		//cout<<curr->id<<endl;
-		
-		if(curr->type == Sink){		//return if this is target
+		if(curr->type == Sink)		//return if this is target
 			return 1;
-			
-		}
 			
 		//run through adj list
 		for(int i = 0; i < int(curr->adj.size()); i++){
@@ -79,9 +70,6 @@ int Graph::BFS(){
 			
 			//make sure original is 1 and we have not visited this node
 			if(thisEdge->original == 1 && !count(visited.begin(), visited.end(), thisId)){
-				
-				//cout<<curr->id<<"-----"<<thisEdge->original<<endl;
-
 				visited.push_back(thisId);					//record node as visited
 				thisNode->backedge = thisEdge->reverse;		//set nodes backedge
 				queue.push_back(thisNode);					//add node to queue
@@ -109,35 +97,35 @@ int Graph::canIspell(){
 
 			//Change original edge -> original =0; residual = 1;
 			//Change reverse edge -> original =1; residual = 0;
-			cur_edge->original = 1;
-			cur_edge->residual = 0;
-			cur_edge->reverse->original = 0;
-			cur_edge->reverse->residual = 1;
+			cur_edge->original = 0;
+			cur_edge->residual = 1;
+			cur_edge->reverse->original = 1;
+			cur_edge->reverse->residual = 0;
 			
 			//keep moving back through the backedges
 			cur_edge = cur_edge->to->backedge;
+			cout<<"here"<<endl;
 		}
-		//Change source to dice edges so it cant be used again	
-		cur_edge->original = 1;
-		cur_edge->residual = 0;
-		cur_edge->reverse->original = 0;
-		cur_edge->reverse->residual = 1;
-
+		cout<<"bye"<<endl;
 	}
+	cout<<"ok------------------------------"<<endl;
+	cout<<"ok------------------------------"<<endl;
 
 	//for loop to check all word nodes to see if residual = 1 and if so-> you can spell word
 	vector <Node *>::iterator nodes_it = nodes.begin();
 
 	while(nodes_it != nodes.end()){
-		if((*nodes_it)->type == Word){
+		if((*nodes_it)->type = Word){
 			//Find edge between word nodes and sink node
 			vector<Edge *>::iterator edges_it = (*nodes_it)->adj.begin();
 			while(edges_it != (*nodes_it)->adj.end()){
-				if((*edges_it)->to == sink_node){
+				if((*edges_it)->to = sink_node){
 					//Return 0 if edges residual doesn't = 1 meaning you cant spell word
-					if((*edges_it)->residual != 1){		
+					if((*edges_it)->residual != 1){
 						return 0;
 					}
+					//found word nodes to sink node edge so no point in continuing loop
+					edges_it = (*nodes_it)->adj.end();
 				}
 				edges_it++;
 			}
@@ -285,7 +273,7 @@ int main(int argc, char* argv[]){
 					
 					//push back new edge connections into adj list of node
 					my_graph->nodes[i]->adj.push_back(to_word);
-					word_node->adj.push_back(from_word);
+					//word_node->adj.push_back(from_word);
 					
 				}
 			}
@@ -337,24 +325,13 @@ int main(int argc, char* argv[]){
 
 		my_graph->nodes.push_back(sink_node);
 		my_graph->minnodes++;
-
-		/*
-		for(int i = 0; i < my_graph->nodes.size(); i++){
-			cout<<"Node "<<my_graph->nodes[i]->id<<": "<<my_graph->nodes[i]->type<<" Edges to ";
-			
-			for(int j = 0; j < my_graph->nodes[i]->adj.size(); j++){
-				cout<<my_graph->nodes[i]->adj[j]->to->id<<" ";
-			}
-			cout<<endl;
-		}
-	*/
-
+	
 		//Make changes to match gradescript output
 		if(my_graph->canIspell()){
-			cout<<"Can spell "<<line<<endl;
+			cout<<"Can spell"<<line<<endl;
 		}
 		else{
-			cout<<"Can't spell "<<line<<endl;
+			cout<<"Can't spell"<<line<<endl;
 		}
 
 		vector <Node *>::iterator nodes_it = my_graph->nodes.begin();
@@ -371,16 +348,6 @@ int main(int argc, char* argv[]){
 				my_graph->nodes.erase(nodes_it+i,nodes_it+(i+1));
 			}
 			else{
-				//Reset all source to dice edges to regular
-				vector <Edge *>::iterator edges_it = my_graph->nodes[i]->adj.begin();
-
-				while(edges_it != my_graph->nodes[i]->adj.end()){	
-					(*edges_it)->original = 1;
-					(*edges_it)->residual = 0;
-					(*edges_it)->reverse->original = 0;
-					(*edges_it)->reverse->residual = 1;
-					edges_it++;
-				}
 				i++;
 			}
 		}

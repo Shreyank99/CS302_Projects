@@ -39,7 +39,7 @@ class Graph{
 		vector <Node *> nodes;
 		int BFS();
 		int canIspell();
-		void Delete_halfGraph();
+		void printspelling();
 		int minnodes;
 };
 
@@ -51,7 +51,7 @@ class Graph{
 int Graph::BFS(){
 	
 	//Clear all backedges that might have be set from prev bfs search
-	for(int i = 0; i < nodes.size(); i++){
+	for(int i = 0; i < int(nodes.size()); i++){
 		nodes[i]->backedge = NULL;
 	}
 
@@ -146,6 +146,53 @@ int Graph::canIspell(){
 	}
 	return 1;	
 }
+
+void Graph::printspelling(){
+	if(canIspell() != 1)
+		return;
+	
+	vector <int> letterIDs;
+	vector <int> diceIDs;
+	
+	vector <Node *>::iterator nodes_it = nodes.begin();
+	
+	while(nodes_it != nodes.end()){
+		if((*nodes_it)->type == Word) {
+			letterIDs.push_back((*nodes_it)->id);
+		}
+		
+		nodes_it++;
+	}
+	while(!letterIDs.empty()){
+		nodes_it = nodes.begin();
+	
+		while(nodes_it != nodes.end()){
+			if((*nodes_it)->type == Dice) {
+				vector<Edge *>::iterator edges_it = (*nodes_it)->adj.begin();
+				while(edges_it != (*nodes_it)->adj.end() && !letterIDs.empty()){
+					if((*edges_it)->to->id == letterIDs[0] && (*edges_it)->residual == 1){
+						diceIDs.push_back((*edges_it)->from->id - 1);
+						letterIDs.erase(letterIDs.begin());
+					}
+				
+					edges_it++;
+				}
+			}
+		
+		nodes_it++;
+		}
+	}
+	
+	for(int i = 0; i < int(diceIDs.size()); i++){
+		if(i != 0)
+			cout << ',';
+		cout << diceIDs[i];
+	}
+	cout << ": ";
+	
+	return;
+}
+
 
 /*
 	Main Execution
@@ -351,16 +398,17 @@ int main(int argc, char* argv[]){
 
 		//Make changes to match gradescript output
 		if(my_graph->canIspell()){
-			cout<<"Can spell "<<line<<endl;
+			my_graph->printspelling();
+			cout<<line<<endl;
 		}
 		else{
-			cout<<"Can't spell "<<line<<endl;
+			cout<<"Cannot spell "<<line<<endl;
 		}
 
 		vector <Node *>::iterator nodes_it = my_graph->nodes.begin();
 
 		//Delete all word nodes and edges between words and dices
-		for(int i = 0; i < my_graph->nodes.size(); ){
+		for(int i = 0; i < int(my_graph->nodes.size()); ){
 			if(my_graph->nodes[i]->type == Dice){
 				//Delete dice-word nodes connection		
 				my_graph->nodes[i]->adj.clear();

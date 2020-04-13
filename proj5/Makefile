@@ -2,12 +2,11 @@ CXX=		g++
 CXXFLAGS=	-g -Wall -std=gnu++11
 SHELL=		bash
 
-all:		readorig
+all:		worddice
 
-readorig:	readorig.cpp
+worddice:	worddice.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
-.PHONY:		clean
+.PHONY:	clean
 
-clean:
-	rm -f readorig
+clean:	rm -f worddice

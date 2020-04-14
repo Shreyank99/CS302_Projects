@@ -393,17 +393,6 @@ int main(int argc, char* argv[]){
 		my_graph->nodes.push_back(sink_node);
 		my_graph->minnodes++;
 
-		/*
-		for(int i = 0; i < my_graph->nodes.size(); i++){
-			cout<<"Node "<<my_graph->nodes[i]->id<<": "<<my_graph->nodes[i]->type<<" Edges to ";
-			
-			for(int j = 0; j < my_graph->nodes[i]->adj.size(); j++){
-				cout<<my_graph->nodes[i]->adj[j]->to->id<<" ";
-			}
-			cout<<endl;
-		}
-	*/
-
 		//Make changes to match gradescript output
 		if(my_graph->canIspell()){
 			my_graph->printspelling();
@@ -444,7 +433,6 @@ int main(int argc, char* argv[]){
 		id = num_dice + 1;
 	
 	}
-
 
 	return 0;
 }
